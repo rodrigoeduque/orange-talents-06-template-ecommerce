@@ -17,6 +17,10 @@ public class Usuario {
     private String login;
     private LocalDateTime dataCriacao = LocalDateTime.now();
 
+    @Deprecated
+    public Usuario() {
+    }
+
     public Usuario(String login, SenhaLimpa senhaLimpa) {
         this.login = login;
         this.senha = senhaLimpa.hash();

@@ -1,11 +1,10 @@
 package br.com.zupacademy.rodrigoeduque.treinomercadolivre.cadastrousuario;
 
+import br.com.zupacademy.rodrigoeduque.treinomercadolivre.cadastrousuario.validator.ValidaEmailUnicoUsuarioValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -14,10 +13,17 @@ import javax.validation.Valid;
 public class NovoUsuarioController {
 
     private UsuarioRepository repository;
+    private ValidaEmailUnicoUsuarioValidator validaEmailUnicoUsuarioValidator;
 
     @Autowired
-    public NovoUsuarioController(UsuarioRepository repository) {
+    public NovoUsuarioController(UsuarioRepository repository, ValidaEmailUnicoUsuarioValidator validaEmailUnicoUsuarioValidator) {
         this.repository = repository;
+        this.validaEmailUnicoUsuarioValidator = validaEmailUnicoUsuarioValidator;
+    }
+
+    @InitBinder
+    public void Init(WebDataBinder binder){
+        binder.addValidators(validaEmailUnicoUsuarioValidator);
     }
 
     @PostMapping("/usuarios")
