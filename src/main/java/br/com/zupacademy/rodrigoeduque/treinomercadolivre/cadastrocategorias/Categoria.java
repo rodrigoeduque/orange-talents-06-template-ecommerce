@@ -20,11 +20,12 @@ public class Categoria {
     private Categoria categoriaMae;
 
     public Categoria(@NotBlank String nome) {
+
         this.nome = nome;
     }
 
     public void setMae(Categoria categoriaMae) {
-
         this.categoriaMae = categoriaMae;
     }
+
 }

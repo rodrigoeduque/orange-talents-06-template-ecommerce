@@ -1,8 +1,11 @@
 package br.com.zupacademy.rodrigoeduque.treinomercadolivre.cadastrocategorias;
 
-import br.com.zupacademy.rodrigoeduque.treinomercadolivre.validator.anotationpersonalizada.ValorUnico;
+import br.com.zupacademy.rodrigoeduque.treinomercadolivre.validator.anotationpersonalizada.existeid.ExisteId;
+import br.com.zupacademy.rodrigoeduque.treinomercadolivre.validator.anotationpersonalizada.valorunico.ValorUnico;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 import java.util.Optional;
 
 public class CategoriaRequest {
@@ -10,14 +13,21 @@ public class CategoriaRequest {
     @NotBlank
     @ValorUnico(classe = Categoria.class, atributo = "nome", message = "Categoria já existe")
     private String nome;
+
+   @ExisteId(classe = Categoria.class, atributo = "id")
+    @Positive
     private Long idCategoriaMae;
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public Long getIdCategoriaMae() {
+        return idCategoriaMae;
     }
 
     public void setIdCategoriaMae(Long idCategoriaMae) {
         this.idCategoriaMae = idCategoriaMae;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public Categoria toModel(CategoriaRepository categoriaRepository) {
@@ -31,5 +41,6 @@ public class CategoriaRequest {
         }
 
         return categoria;
+
     }
 }

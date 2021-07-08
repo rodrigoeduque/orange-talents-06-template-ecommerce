@@ -1,4 +1,4 @@
-package br.com.zupacademy.rodrigoeduque.treinomercadolivre.validator.anotationpersonalizada;
+package br.com.zupacademy.rodrigoeduque.treinomercadolivre.validator.anotationpersonalizada.valorunico;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
