@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 public class TreinoMercadoLivreApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(TreinoMercadoLivreApplication.class, args);
 	}
 

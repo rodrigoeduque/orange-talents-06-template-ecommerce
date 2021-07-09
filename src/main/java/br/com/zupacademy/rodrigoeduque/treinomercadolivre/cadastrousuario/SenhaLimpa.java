@@ -5,6 +5,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SenhaLimpa {
     private String senha;
 
+    public String getSenha() {
+        return senha;
+    }
+
     public SenhaLimpa(String senha) {
         this.senha = senha;
     }

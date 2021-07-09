@@ -1,5 +1,7 @@
 package br.com.zupacademy.rodrigoeduque.treinomercadolivre.cadastrousuario;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -27,5 +29,9 @@ public class UsuarioRequest {
 
     public Usuario toModel() {
         return new Usuario(login, new SenhaLimpa(senha));
+    }
+
+    public UsernamePasswordAuthenticationToken converterDadosAutenticacao() {
+        return new UsernamePasswordAuthenticationToken(login, senha);
     }
 }
