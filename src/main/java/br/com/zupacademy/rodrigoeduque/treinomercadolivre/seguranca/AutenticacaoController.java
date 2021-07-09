@@ -33,7 +33,6 @@ public class AutenticacaoController {
             try {
                 Authentication authenticate = authenticationManager.authenticate(dadosAutenticacao);
                 String token = tokenService.gerarToken(authenticate);
-                System.out.println("Meu TOKEN é : " + token);
                 return ResponseEntity.ok(new TokenResponse(token, "Bearer"));
             }
             catch (AuthenticationException exception){
