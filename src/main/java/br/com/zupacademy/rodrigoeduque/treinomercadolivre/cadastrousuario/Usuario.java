@@ -71,10 +71,7 @@ public class Usuario implements UserDetails {
     @Override
     public String toString() {
         return "Usuario{" +
-                "id=" + id +
-                ", senha='" + senha + '\'' +
-                ", login='" + login + '\'' +
-                ", dataCriacao=" + dataCriacao +
+                ", email='" + login + '\'' +
                 '}';
     }
 }

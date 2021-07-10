@@ -25,7 +25,16 @@ public class Categoria {
     }
 
     public void setMae(Categoria categoriaMae) {
+
         this.categoriaMae = categoriaMae;
     }
 
+    @Override
+    public String toString() {
+        return "Categoria{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", categoriaMae=" + categoriaMae +
+                '}';
+    }
 }
