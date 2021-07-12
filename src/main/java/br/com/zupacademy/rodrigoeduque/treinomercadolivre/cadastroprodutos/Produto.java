@@ -61,6 +61,14 @@ public class Produto {
         this.caracteristicas.addAll(novasCaracteristicas);
     }
 
+    public Usuario getUsuarioProduto() {
+        return usuarioProduto;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
     @Override
     public String toString() {
         return "Produto{" +
