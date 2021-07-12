@@ -6,6 +6,7 @@ import br.com.zupacademy.rodrigoeduque.treinomercadolivre.cadastroprodutos.Produ
 import br.com.zupacademy.rodrigoeduque.treinomercadolivre.cadastrousuario.Usuario;
 import br.com.zupacademy.rodrigoeduque.treinomercadolivre.cadastrousuario.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -26,13 +27,13 @@ public class NovaOpiniaoController {
     }
 
     @PostMapping("produtos/{id}/opinioes")
-   public String criar(@RequestBody @Valid NovaOpiniaoRequest request, @PathVariable("id") Long id){
-        Usuario cliente = usuarioRepository.findById(3L).get();
+   public ResponseEntity<?> criar(@RequestBody @Valid NovaOpiniaoRequest request, @PathVariable("id") Long id){
+        Usuario cliente = usuarioRepository.findById(1L).get();
         Produto produto = produtoRepository.findById(id).get();
 
        Opiniao opiniao = request.toModel(produto, cliente);
        opiniaoRepository.save(opiniao);
 
-       return opiniao.toString();
+       return ResponseEntity.ok().build();
    }
 }
