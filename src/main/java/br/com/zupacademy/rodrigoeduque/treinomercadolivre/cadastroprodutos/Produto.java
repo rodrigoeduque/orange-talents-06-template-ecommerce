@@ -4,6 +4,7 @@ import br.com.zupacademy.rodrigoeduque.treinomercadolivre.cadastrocategorias.Cat
 import br.com.zupacademy.rodrigoeduque.treinomercadolivre.cadastroopinioes.Opiniao;
 import br.com.zupacademy.rodrigoeduque.treinomercadolivre.cadastroperguntas.Pergunta;
 import br.com.zupacademy.rodrigoeduque.treinomercadolivre.cadastrousuario.Usuario;
+import io.jsonwebtoken.lang.Assert;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -102,6 +103,10 @@ public class Produto {
         return perguntas;
     }
 
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
     @Override
     public String toString() {
         return "Produto{" +
@@ -146,5 +151,15 @@ public class Produto {
 
     public Opinioes getOpinioes() {
         return new Opinioes(this.opinioes);
+    }
+
+    public boolean baixaEstoque(@Positive Integer quantidade) {
+        Assert.isTrue(quantidade>0,"quantidade informada menor que zero!");
+
+        if (quantidade<= this.quantidade){
+            this.quantidade-=quantidade;
+            return true;
+        }
+        return false;
     }
 }
