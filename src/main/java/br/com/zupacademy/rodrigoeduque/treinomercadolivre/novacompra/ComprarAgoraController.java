@@ -1,5 +1,6 @@
 package br.com.zupacademy.rodrigoeduque.treinomercadolivre.novacompra;
 
+import br.com.zupacademy.rodrigoeduque.treinomercadolivre.cadastroperguntas.EnviaEmailFake;
 import br.com.zupacademy.rodrigoeduque.treinomercadolivre.cadastroprodutos.Produto;
 import br.com.zupacademy.rodrigoeduque.treinomercadolivre.cadastroprodutos.ProdutoRepository;
 import br.com.zupacademy.rodrigoeduque.treinomercadolivre.cadastrousuario.Usuario;
@@ -28,12 +29,14 @@ public class ComprarAgoraController {
     private ProdutoRepository produtoRepository;
     private UsuarioRepository usuarioRepository;
     private CompraRepository compraRepository;
+    private EnviaEmailFake emailFake;
 
     @Autowired
-    public ComprarAgoraController(ProdutoRepository produtoRepository, UsuarioRepository usuarioRepository, CompraRepository compraRepository) {
+    public ComprarAgoraController(ProdutoRepository produtoRepository, UsuarioRepository usuarioRepository, CompraRepository compraRepository, EnviaEmailFake emailFake) {
         this.produtoRepository = produtoRepository;
         this.usuarioRepository = usuarioRepository;
         this.compraRepository = compraRepository;
+        this.emailFake = emailFake;
     }
 
     @PostMapping("/compras")
@@ -51,11 +54,13 @@ public class ComprarAgoraController {
             compraRepository.save(compraFinalizada);
 
             if (gatewayFormaDePagamento.equals(GatewayFormaDePagamento.pagseguro)) {
+                emailFake.enviaEmailFinalizaçãoCompra(compraFinalizada);
                 String urlPagSeguro = uriComponentsBuilder.path("/compras/pagseguro.com?returnId={id_externo}&redirectUrl=urlRetornoAppPosPagamentoPAGSEGURO").buildAndExpand(compraFinalizada.getId_externo()).toString();
                 return ResponseEntity.status(HttpStatus.FOUND).body(urlPagSeguro);
 
 
             } else if (gatewayFormaDePagamento.equals(GatewayFormaDePagamento.paypal)) {
+                emailFake.enviaEmailFinalizaçãoCompra(compraFinalizada);
                 String urlPayPal = uriComponentsBuilder.path("/compras/paypal.com?buyerId={id_externo}&redirectUrl=urlRetornoAppPosPagamentoPAYPAL").buildAndExpand(compraFinalizada.getId_externo()).toString();
                 return ResponseEntity.status(HttpStatus.FOUND).body(urlPayPal);
 

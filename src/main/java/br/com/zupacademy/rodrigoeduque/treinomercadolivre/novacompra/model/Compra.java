@@ -48,4 +48,19 @@ public class Compra {
         return id_externo;
     }
 
+    public Integer getQuantidadeCompra() {
+        return quantidadeCompra;
+    }
+
+    public Produto getProdutoCompra() {
+        return produtoCompra;
+    }
+
+    public Usuario getUsuarioConsumidor() {
+        return usuarioConsumidor;
+    }
+
+    public GatewayFormaDePagamento getGatewayFormaDePagamento() {
+        return gatewayFormaDePagamento;
+    }
 }
