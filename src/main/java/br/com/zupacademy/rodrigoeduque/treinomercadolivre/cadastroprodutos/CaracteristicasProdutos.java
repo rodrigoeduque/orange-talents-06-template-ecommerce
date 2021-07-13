@@ -25,6 +25,14 @@ public class CaracteristicasProdutos {
         this.produto = produto;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

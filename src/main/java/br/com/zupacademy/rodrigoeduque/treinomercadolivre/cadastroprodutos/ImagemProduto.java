@@ -32,6 +32,10 @@ public class ImagemProduto {
     public ImagemProduto() {
     }
 
+    public String getLink() {
+        return link;
+    }
+
     @Override
     public String toString() {
         return "ImagemProduto{" +

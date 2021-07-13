@@ -1,8 +1,9 @@
 package br.com.zupacademy.rodrigoeduque.treinomercadolivre.cadastroprodutos;
 
 import br.com.zupacademy.rodrigoeduque.treinomercadolivre.cadastrocategorias.Categoria;
+import br.com.zupacademy.rodrigoeduque.treinomercadolivre.cadastroopinioes.Opiniao;
+import br.com.zupacademy.rodrigoeduque.treinomercadolivre.cadastroperguntas.Pergunta;
 import br.com.zupacademy.rodrigoeduque.treinomercadolivre.cadastrousuario.Usuario;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -38,8 +39,16 @@ public class Produto {
 
     @OneToMany(mappedBy = "produto", cascade = CascadeType.PERSIST)
     private Set<CaracteristicasProdutos> caracteristicas = new HashSet<>();
+
     @OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
     private List<ImagemProduto> imagens = new ArrayList<>();
+
+    @OneToMany(mappedBy = "produto")
+    private List<Pergunta> perguntas = new ArrayList<>();
+
+    @OneToMany(mappedBy = "produto")
+    private Set<Opiniao> opinioes = new HashSet<>();
+
 
     @Deprecated
     public Produto() {
@@ -61,12 +70,36 @@ public class Produto {
         this.caracteristicas.addAll(novasCaracteristicas);
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public Usuario getUsuarioProduto() {
         return usuarioProduto;
     }
 
     public String getNome() {
         return nome;
+    }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public Set<CaracteristicasProdutos> getCaracteristicas() {
+        return caracteristicas;
+    }
+
+    public List<ImagemProduto> getImagens() {
+        return imagens;
+    }
+
+    public List<Pergunta> getPerguntas() {
+        return perguntas;
     }
 
     @Override
@@ -107,6 +140,11 @@ public class Produto {
     }
 
     public boolean pertenceUsuarioLogado(Usuario usuarioProduto) {
+
         return this.usuarioProduto.equals(usuarioProduto);
+    }
+
+    public Opinioes getOpinioes() {
+        return new Opinioes(this.opinioes);
     }
 }

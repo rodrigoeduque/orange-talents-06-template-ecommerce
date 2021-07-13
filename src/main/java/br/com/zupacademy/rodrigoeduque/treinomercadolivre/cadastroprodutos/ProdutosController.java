@@ -13,7 +13,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -33,14 +32,14 @@ public class ProdutosController {
     }
 
     @InitBinder("produtoRequest")
-    public void init(WebDataBinder webDataBinder){
+    public void init(WebDataBinder webDataBinder) {
         webDataBinder.addValidators(new ValidacaoCaracteristicasIguaisValidator());
     }
 
     @PostMapping("/produtos")
-    public ResponseEntity<?> criar(@RequestBody @Valid ProdutoRequest produtoRequest){
+    public ResponseEntity<?> criar(@RequestBody @Valid ProdutoRequest produtoRequest) {
         Usuario usuarioProduto = usuarioRepository.findById(2L).get();
-        Produto produto = produtoRequest.toModel(categoriaRepository,usuarioProduto);
+        Produto produto = produtoRequest.toModel(categoriaRepository, usuarioProduto);
         produtoRepository.save(produto);
 
 
@@ -48,11 +47,11 @@ public class ProdutosController {
     }
 
     @PostMapping("/produtos/{id}/img")
-    public ResponseEntity<?> adicionaImagem(@PathVariable("id") Long id, @Valid ImagemProdutoRequest imagemProdutoRequest){
-        Usuario usuarioProduto = usuarioRepository.findById(1L).get();
+    public ResponseEntity<?> adicionaImagem(@PathVariable("id") Long id, @Valid ImagemProdutoRequest imagemProdutoRequest) {
+        Usuario usuarioProduto = usuarioRepository.findById(2L).get();
         Produto produto = produtoRepository.findById(id).get();
 
-        if (!produto.pertenceUsuarioLogado(usuarioProduto)){
+        if (!produto.pertenceUsuarioLogado(usuarioProduto)) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }
 

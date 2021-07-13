@@ -28,6 +28,10 @@ public class Pergunta {
         this.produto = produto;
     }
 
+    @Deprecated
+    public Pergunta() {
+    }
+
     @Override
     public String toString() {
         return "Pergunta{" +
@@ -40,4 +44,5 @@ public class Pergunta {
     public String getTitulo() {
         return titulo;
     }
+
 }

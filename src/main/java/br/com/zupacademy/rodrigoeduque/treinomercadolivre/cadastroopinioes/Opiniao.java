@@ -34,6 +34,11 @@ public class Opiniao {
     @ManyToOne
     private Usuario cliente;
 
+
+    @Deprecated
+    public Opiniao() {
+    }
+
     public Opiniao(@NotBlank String titulo, @NotBlank @Length(max = 500) String descricao, @NotNull @Range(min = 1, max = 5) Integer nota, @NotNull @Valid Produto produto, @NotNull @Valid Usuario cliente) {
         this.titulo = titulo;
         this.descricao = descricao;
@@ -42,15 +47,26 @@ public class Opiniao {
         this.cliente = cliente;
     }
 
-    @Override
-    public String toString() {
-        return "Opiniao{" +
-                "id=" + id +
-                ", titulo='" + titulo + '\'' +
-                ", descricao='" + descricao + '\'' +
-                ", nota=" + nota +
-                ", produto=" + produto +
-                ", cliente=" + cliente +
-                '}';
+
+    public String getTitulo() {
+        return titulo;
     }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public Integer getNota() {
+        return nota;
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void SomaNota() {
+        this.nota += nota;
+    }
+
+
 }
