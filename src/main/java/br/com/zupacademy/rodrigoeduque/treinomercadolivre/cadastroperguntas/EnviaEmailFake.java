@@ -40,4 +40,7 @@ public class EnviaEmailFake {
 
         System.out.println(textoEmail);
     }
+
+    public void sucesso(Compra compra) {
+    }
 }

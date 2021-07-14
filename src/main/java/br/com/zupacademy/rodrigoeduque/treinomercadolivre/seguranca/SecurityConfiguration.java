@@ -45,6 +45,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/api/rankingvendedores").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/notasfiscais").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/emailsucesso").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/produtos/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/auth").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/usuarios").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/produtos").permitAll()
@@ -53,7 +57,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/produtos/**/perguntas").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/categorias").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/compras").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/produtos/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/compras/retorno-pagseguro/**").permitAll()
                 .anyRequest().authenticated()
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
